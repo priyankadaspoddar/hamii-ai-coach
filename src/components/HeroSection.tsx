@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -64,10 +65,12 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          <Button variant="hero" size="xl" className="group">
-            Start Free Trial
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+          <Link to="/auth">
+            <Button variant="hero" size="xl" className="group">
+              Start Free Trial
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
           <Button variant="heroOutline" size="xl" className="group">
             <Play className="w-5 h-5" />
             Watch Demo
