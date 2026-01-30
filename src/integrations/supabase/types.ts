@@ -14,7 +14,164 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      analysis_metrics: {
+        Row: {
+          avg_attention_score: number | null
+          avg_eye_contact_score: number | null
+          avg_pitch_hz: number | null
+          avg_posture_score: number | null
+          avg_smile_score: number | null
+          clarity_score: number | null
+          content_relevance_score: number | null
+          created_at: string
+          expression_confidence: number | null
+          filler_word_count: number | null
+          head_position_stability: number | null
+          id: string
+          overall_confidence_score: number | null
+          overall_nonverbal_score: number | null
+          overall_verbal_score: number | null
+          pitch_variability: number | null
+          sentiment_score: number | null
+          session_id: string
+          shoulder_alignment: number | null
+          speech_pace_wpm: number | null
+          user_id: string
+          vocabulary_diversity: number | null
+        }
+        Insert: {
+          avg_attention_score?: number | null
+          avg_eye_contact_score?: number | null
+          avg_pitch_hz?: number | null
+          avg_posture_score?: number | null
+          avg_smile_score?: number | null
+          clarity_score?: number | null
+          content_relevance_score?: number | null
+          created_at?: string
+          expression_confidence?: number | null
+          filler_word_count?: number | null
+          head_position_stability?: number | null
+          id?: string
+          overall_confidence_score?: number | null
+          overall_nonverbal_score?: number | null
+          overall_verbal_score?: number | null
+          pitch_variability?: number | null
+          sentiment_score?: number | null
+          session_id: string
+          shoulder_alignment?: number | null
+          speech_pace_wpm?: number | null
+          user_id: string
+          vocabulary_diversity?: number | null
+        }
+        Update: {
+          avg_attention_score?: number | null
+          avg_eye_contact_score?: number | null
+          avg_pitch_hz?: number | null
+          avg_posture_score?: number | null
+          avg_smile_score?: number | null
+          clarity_score?: number | null
+          content_relevance_score?: number | null
+          created_at?: string
+          expression_confidence?: number | null
+          filler_word_count?: number | null
+          head_position_stability?: number | null
+          id?: string
+          overall_confidence_score?: number | null
+          overall_nonverbal_score?: number | null
+          overall_verbal_score?: number | null
+          pitch_variability?: number | null
+          sentiment_score?: number | null
+          session_id?: string
+          shoulder_alignment?: number | null
+          speech_pace_wpm?: number | null
+          user_id?: string
+          vocabulary_diversity?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "analysis_metrics_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      interview_sessions: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          ended_at: string | null
+          id: string
+          industry: string | null
+          job_role: string | null
+          session_type: string
+          started_at: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          industry?: string | null
+          job_role?: string | null
+          session_type?: string
+          started_at?: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          industry?: string | null
+          job_role?: string | null
+          session_type?: string
+          started_at?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          experience_level: string | null
+          full_name: string | null
+          id: string
+          industry: string | null
+          target_role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          industry?: string | null
+          target_role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          industry?: string | null
+          target_role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
