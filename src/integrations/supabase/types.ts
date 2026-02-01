@@ -136,6 +136,56 @@ export type Database = {
         }
         Relationships: []
       }
+      phase_results: {
+        Row: {
+          analysis_data: Json | null
+          created_at: string
+          duration_seconds: number | null
+          feedback: Json | null
+          id: string
+          passed: boolean | null
+          phase: string
+          score: number | null
+          session_id: string
+          transcript: string | null
+          user_id: string
+        }
+        Insert: {
+          analysis_data?: Json | null
+          created_at?: string
+          duration_seconds?: number | null
+          feedback?: Json | null
+          id?: string
+          passed?: boolean | null
+          phase: string
+          score?: number | null
+          session_id: string
+          transcript?: string | null
+          user_id: string
+        }
+        Update: {
+          analysis_data?: Json | null
+          created_at?: string
+          duration_seconds?: number | null
+          feedback?: Json | null
+          id?: string
+          passed?: boolean | null
+          phase?: string
+          score?: number | null
+          session_id?: string
+          transcript?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phase_results_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -172,6 +222,163 @@ export type Database = {
         }
         Relationships: []
       }
+      resumes: {
+        Row: {
+          created_at: string
+          education: string | null
+          experience_years: number | null
+          filename: string
+          id: string
+          parsed_sections: Json | null
+          raw_text: string
+          skills: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          education?: string | null
+          experience_years?: number | null
+          filename: string
+          id?: string
+          parsed_sections?: Json | null
+          raw_text: string
+          skills?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          education?: string | null
+          experience_years?: number | null
+          filename?: string
+          id?: string
+          parsed_sections?: Json | null
+          raw_text?: string
+          skills?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      session_questions: {
+        Row: {
+          correct_answer: string | null
+          created_at: string
+          difficulty: string | null
+          explanation: string | null
+          id: string
+          is_correct: boolean | null
+          options: Json
+          phase: string
+          question_text: string
+          session_id: string
+          skill_area: string | null
+          time_taken_seconds: number | null
+          user_answer: string | null
+          user_id: string
+        }
+        Insert: {
+          correct_answer?: string | null
+          created_at?: string
+          difficulty?: string | null
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          options?: Json
+          phase?: string
+          question_text: string
+          session_id: string
+          skill_area?: string | null
+          time_taken_seconds?: number | null
+          user_answer?: string | null
+          user_id: string
+        }
+        Update: {
+          correct_answer?: string | null
+          created_at?: string
+          difficulty?: string | null
+          explanation?: string | null
+          id?: string
+          is_correct?: boolean | null
+          options?: Json
+          phase?: string
+          question_text?: string
+          session_id?: string
+          skill_area?: string | null
+          time_taken_seconds?: number | null
+          user_answer?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_questions_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      session_reports: {
+        Row: {
+          behavioral_score: number | null
+          created_at: string
+          detailed_feedback: Json | null
+          emotion_timeline: Json | null
+          id: string
+          improvement_areas: string[] | null
+          overall_score: number | null
+          report_pdf_url: string | null
+          resume_score: number | null
+          session_id: string
+          strengths: string[] | null
+          tech_score: number | null
+          user_id: string
+          weaknesses: string[] | null
+        }
+        Insert: {
+          behavioral_score?: number | null
+          created_at?: string
+          detailed_feedback?: Json | null
+          emotion_timeline?: Json | null
+          id?: string
+          improvement_areas?: string[] | null
+          overall_score?: number | null
+          report_pdf_url?: string | null
+          resume_score?: number | null
+          session_id: string
+          strengths?: string[] | null
+          tech_score?: number | null
+          user_id: string
+          weaknesses?: string[] | null
+        }
+        Update: {
+          behavioral_score?: number | null
+          created_at?: string
+          detailed_feedback?: Json | null
+          emotion_timeline?: Json | null
+          id?: string
+          improvement_areas?: string[] | null
+          overall_score?: number | null
+          report_pdf_url?: string | null
+          resume_score?: number | null
+          session_id?: string
+          strengths?: string[] | null
+          tech_score?: number | null
+          user_id?: string
+          weaknesses?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "session_reports_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "interview_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -180,7 +387,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      interview_phase: "mcq" | "resume" | "behavioral"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -307,6 +514,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      interview_phase: ["mcq", "resume", "behavioral"],
+    },
   },
 } as const
